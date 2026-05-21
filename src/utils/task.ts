@@ -194,7 +194,9 @@ export function addTranslateTask(
   const isConcatMode =
     type === "text" &&
     (addon.data.translate.concatCheckbox ||
-      (getPref("enableConcatKey") && addon.data.translate.concatKey));
+      (getPref("enableConcatKey") &&
+        (addon.data.translate.concatKey ||
+          addon.data.translate.concatMouseSelection)));
   const lastTask = getLastTranslateTask({ type: "text" });
   if (isConcatMode && lastTask) {
     lastTask.raw += " " + raw;

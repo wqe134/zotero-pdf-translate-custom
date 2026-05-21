@@ -29,6 +29,7 @@ class Addon {
     translate: {
       selectedText: string;
       concatKey: boolean;
+      concatMouseSelection: boolean;
       concatCheckbox: boolean;
       queue: TranslateTask[];
       maximumQueueLength: number;
@@ -56,6 +57,7 @@ class Addon {
       translate: {
         selectedText: "",
         concatKey: false,
+        concatMouseSelection: false,
         concatCheckbox: false,
         queue: [],
         maximumQueueLength: 100,

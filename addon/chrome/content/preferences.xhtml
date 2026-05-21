@@ -95,6 +95,14 @@
         preference="__prefsPrefix__.enableHidePopupTextarea"
       />
       <checkbox
+        id="__addonRef__-enablePopupDoubleClickCopy"
+        data-l10n-id="pref-basic-enablePopupDoubleClickCopy"
+        class="enable-popup"
+        style="padding-left: 18px"
+        native="true"
+        preference="__prefsPrefix__.enablePopupDoubleClickCopy"
+      />
+      <checkbox
         id="__addonRef__-enableAddToNote"
         data-l10n-id="pref-basic-enableNote"
         class="enable-popup"
@@ -248,10 +256,22 @@
       preference="__prefsPrefix__.showSidebarConcat"
     />
     <checkbox
+      id="__addonRef__-enableConcatKey"
       data-l10n-id="pref-interface-enableConcatKey"
       native="true"
       preference="__prefsPrefix__.enableConcatKey"
     />
+    <hbox align="center" style="padding-left: 18px">
+      <label data-l10n-id="pref-interface-concatShortcutKey"></label>
+      <html:input
+        id="__addonRef__-concatShortcutKey"
+        type="text"
+        class="enable-concat-key"
+        preference="__prefsPrefix__.concatShortcutKey"
+        placeholder="Click and press shortcut"
+        style="min-width: 80px"
+      ></html:input>
+    </hbox>
     <checkbox
       data-l10n-id="pref-interface-showSidebarCopy"
       native="true"

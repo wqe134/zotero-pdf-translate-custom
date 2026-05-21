@@ -1,14 +1,19 @@
-const concatKey = Zotero.isMac ? "Meta" : "Control";
+import {
+  isConcatShortcutKeyboardDownEvent,
+  isConcatShortcutKeyboardUpEvent,
+} from "../utils/concatShortcut";
 
 export function registerShortcuts() {
   ztoolkit.Keyboard.register((ev, data) => {
     if (data.type === "keydown") {
-      if (ev.key === concatKey) {
+      if (isConcatShortcutKeyboardDownEvent(ev)) {
         addon.data.translate.concatKey = true;
       }
     }
     if (data.type === "keyup") {
-      addon.data.translate.concatKey = false;
+      if (isConcatShortcutKeyboardUpEvent(ev)) {
+        addon.data.translate.concatKey = false;
+      }
       if (data.keyboard?.equals("accel,T")) {
         const isReaderWindow =
           ev.target?.ownerGlobal?.location?.href ===

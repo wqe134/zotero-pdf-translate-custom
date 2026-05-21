@@ -8,6 +8,8 @@ pref-basic-enablePopup =
     .label = Enable Reader Selection Pop-up
 pref-basic-enableHidePopupTextarea =
     .label = Hide Pop-up Text Area
+pref-basic-enablePopupDoubleClickCopy =
+    .label = Double-click Pop-up Text to Copy
 pref-basic-annotationTranslationInComment =
     .label = Save Translation in Annotation Comment
 pref-basic-annotationTranslationInBody =
@@ -84,10 +86,12 @@ pref-interface-showSidebarSettings =
 pref-interface-showSidebarConcat =
     .label = Item Pane Section: Show Concatenated Translation Menu
 pref-interface-enableConcatKey =
-    .label = Item Pane Section: Hold down { PLATFORM() ->
+    .label = Enable Concat Mode shortcut ({ PLATFORM() ->
         [macos] ⌘
        *[other] Ctrl
-    } to enable Concat Mode
+    } by default)
+pref-interface-concatShortcutKey =
+    .value = Click field and press shortcut (empty = platform default)
 pref-interface-showSidebarRaw =
     .label = Item Pane Section: Show Raw
 pref-interface-enableMathRendering =

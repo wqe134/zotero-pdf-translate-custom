@@ -1,15 +1,33 @@
 import { config } from "../../package.json";
 import { SVGIcon } from "../utils/config";
+import {
+  isConcatShortcutKeyboardDownEvent,
+  isConcatShortcutKeyboardUpEvent,
+  isConcatShortcutMouseEvent,
+} from "../utils/concatShortcut";
 import { addTranslateAnnotationTask } from "../utils/task";
 import { getString } from "../utils/locale";
 
+const readerConcatListenerDocs = new WeakSet<Document>();
+const readerConcatClearTimers = new WeakMap<Document, number>();
+
 export function registerReaderInitializer() {
+  Zotero.Reader.registerEventListener(
+    "renderToolbar",
+    (event) => {
+      registerReaderConcatMouseSelection(event.doc);
+    },
+    config.addonID,
+  );
+
   Zotero.Reader.registerEventListener(
     "renderTextSelectionPopup",
     (event) => {
       const { reader, doc, params, append } = event;
+      registerReaderConcatMouseSelection(doc);
       addon.data.translate.selectedText = params.annotation.text.trim();
       addon.hooks.onReaderPopupShow(event);
+      clearReaderConcatMouseSelection(doc);
     },
     config.addonID,
   );
@@ -62,6 +80,63 @@ export function registerReaderInitializer() {
     },
     config.addonID,
   );
+}
+
+function registerReaderConcatMouseSelection(doc: Document) {
+  if (readerConcatListenerDocs.has(doc)) {
+    return;
+  }
+  readerConcatListenerDocs.add(doc);
+
+  const markMouseSelection = (event: MouseEvent) => {
+    if (isConcatShortcutMouseEvent(event)) {
+      addon.data.translate.concatMouseSelection = true;
+      scheduleReaderConcatMouseSelectionClear(doc);
+    }
+  };
+
+  const updateConcatKey = (event: KeyboardEvent) => {
+    if (event.type === "keydown" && isConcatShortcutKeyboardDownEvent(event)) {
+      addon.data.translate.concatKey = true;
+    } else if (
+      event.type === "keyup" &&
+      isConcatShortcutKeyboardUpEvent(event)
+    ) {
+      addon.data.translate.concatKey = false;
+    }
+  };
+
+  doc.addEventListener("pointerdown", markMouseSelection, true);
+  doc.addEventListener("pointerup", markMouseSelection, true);
+  doc.addEventListener("mousedown", markMouseSelection, true);
+  doc.addEventListener("mouseup", markMouseSelection, true);
+  doc.addEventListener("keydown", updateConcatKey, true);
+  doc.addEventListener("keyup", updateConcatKey, true);
+}
+
+function scheduleReaderConcatMouseSelectionClear(doc: Document) {
+  const win = doc.defaultView;
+  if (!win) {
+    return;
+  }
+  const oldTimer = readerConcatClearTimers.get(doc);
+  if (oldTimer !== undefined) {
+    win.clearTimeout(oldTimer);
+  }
+  readerConcatClearTimers.set(
+    doc,
+    win.setTimeout(() => clearReaderConcatMouseSelection(doc), 3000),
+  );
+}
+
+function clearReaderConcatMouseSelection(doc: Document) {
+  const win = doc.defaultView;
+  const oldTimer = readerConcatClearTimers.get(doc);
+  if (win && oldTimer !== undefined) {
+    win.clearTimeout(oldTimer);
+  }
+  readerConcatClearTimers.delete(doc);
+  addon.data.translate.concatMouseSelection = false;
 }
 
 function createTranslateAnnotationButton(

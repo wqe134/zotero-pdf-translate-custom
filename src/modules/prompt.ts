@@ -8,29 +8,32 @@ export function registerPrompt() {
       when: () => {
         const selection = addon.data.translate.selectedText;
         const sl = Zotero.Prefs.get(
-          "ZoteroPDFTranslate.sourceLanguage",
+          `${config.prefsPrefix}.sourceLanguage`,
+          true,
         ) as string;
         const tl = Zotero.Prefs.get(
-          "ZoteroPDFTranslate.targetLanguage",
+          `${config.prefsPrefix}.targetLanguage`,
+          true,
         ) as string;
         return (
           selection.length > 0 &&
-          Zotero?.PDFTranslate &&
+          (Zotero as any)?.[config.addonInstance] &&
           sl.startsWith("en") &&
           tl.startsWith("zh")
         );
       },
       callback: async (prompt) => {
         const selection = addon.data.translate.selectedText;
-        const queue = Zotero.PDFTranslate.data.translate.queue;
+        const currentAddon = (Zotero as any)[config.addonInstance] as typeof addon;
+        const queue = currentAddon.data.translate.queue;
         let task = queue.find(
           (task: any) => task.raw == selection && task.result.length > 0,
         );
         task = undefined;
         if (!task) {
           prompt.showTip("Loading...");
-          task = await Zotero.PDFTranslate.api.translate(selection);
-          Zotero.PDFTranslate.data.translate.queue.push(task);
+          task = await currentAddon.api.translate(selection);
+          currentAddon.data.translate.queue.push(task);
           // eslint-disable-next-line @typescript-eslint/ban-ts-comment
           // @ts-ignore
           prompt.exit();

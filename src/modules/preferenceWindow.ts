@@ -2,6 +2,7 @@ import { config, homepage } from "../../package.json";
 import { LANG_CODE } from "../utils/config";
 import { getString } from "../utils/locale";
 import { getPref, setPref } from "../utils/prefs";
+import { captureConcatShortcut } from "../utils/concatShortcut";
 import {
   getServiceSecret,
   setServiceSecret,
@@ -229,6 +230,14 @@ function buildPrefsPane() {
     });
 
   doc
+    .querySelector(`#${makeId("enableConcatKey")}`)
+    ?.addEventListener("command", () => {
+      onPrefsEvents("setEnableConcatKey");
+    });
+
+  registerConcatShortcutRecorder(doc);
+
+  doc
     .querySelector(`#${makeId("sentenceServicesSecret")}`)
     ?.addEventListener("blur", (e: Event) => {
       onPrefsEvents("updateSentenceSecret");
@@ -287,6 +296,7 @@ function updatePrefsPaneDefault() {
   onPrefsEvents("setEnablePopup", false);
   onPrefsEvents("setShowPlayBtn", false);
   onPrefsEvents("setUseWordService", false);
+  onPrefsEvents("setEnableConcatKey", false);
   onPrefsEvents("setSentenceSecret", false);
   onPrefsEvents("setWordSecret", false);
   onPrefsEvents("setEnableAutoTagAnnotation", false);
@@ -384,6 +394,15 @@ function onPrefsEvents(type: string, fromElement: boolean = true) {
           : (getPref("enableAutoTagAnnotation") as boolean);
         const hidden = !elemValue;
         setDisabled("enable-auto-tag-annotation", hidden);
+      }
+      break;
+    case "setEnableConcatKey":
+      {
+        const elemValue = fromElement
+          ? (doc.querySelector(`#${makeId("enableConcatKey")}`) as XUL.Checkbox)
+              .checked
+          : (getPref("enableConcatKey") as boolean);
+        setDisabled("enable-concat-key", !elemValue);
       }
       break;
     case "setSentenceService":
@@ -548,4 +567,102 @@ function onPrefsEvents(type: string, fromElement: boolean = true) {
 
 function makeId(type: string) {
   return `${config.addonRef}-${type}`;
+}
+
+function registerConcatShortcutRecorder(doc: Document) {
+  const input = doc.querySelector(`#${makeId("concatShortcutKey")}`) as
+    | HTMLInputElement
+    | null;
+  if (!input) {
+    return;
+  }
+
+  const updateFromPref = () => {
+    input.value = String(getPref("concatShortcutKey") || "");
+    input.placeholder = "Click and press shortcut";
+  };
+
+  const setRecordingState = (recording: boolean) => {
+    input.dataset.recording = recording ? "true" : "false";
+    if (recording) {
+      input.value = "";
+      input.placeholder = "Press shortcut...";
+    } else {
+      updateFromPref();
+    }
+  };
+
+  const commit = (value: string) => {
+    setPref("concatShortcutKey", value);
+    updateFromPref();
+  };
+
+  updateFromPref();
+  input.readOnly = true;
+  input.spellcheck = false;
+  input.autocomplete = "off";
+  input.title =
+    "Click the field, then press a shortcut. Backspace clears it, Esc cancels.";
+
+  input.addEventListener("focus", () => {
+    setRecordingState(true);
+  });
+
+  input.addEventListener("blur", () => {
+    delete input.dataset.recording;
+    delete input.dataset.pendingModifier;
+    updateFromPref();
+  });
+
+  input.addEventListener("keydown", (event: KeyboardEvent) => {
+    if (input.dataset.recording !== "true") {
+      return;
+    }
+    const shortcut = captureConcatShortcut(event);
+    if (!shortcut) {
+      return;
+    }
+    event.preventDefault();
+    event.stopPropagation();
+
+    if (shortcut.cancel) {
+      input.blur();
+      return;
+    }
+
+    if (shortcut.clear) {
+      commit("");
+      input.blur();
+      return;
+    }
+
+    if (shortcut.modifierOnly) {
+      input.dataset.pendingModifier = shortcut.value;
+      return;
+    }
+
+    commit(shortcut.value);
+    delete input.dataset.pendingModifier;
+    input.blur();
+  });
+
+  input.addEventListener("keyup", (event: KeyboardEvent) => {
+    if (
+      input.dataset.recording !== "true" ||
+      !input.dataset.pendingModifier
+    ) {
+      return;
+    }
+    const shortcut = captureConcatShortcut(event);
+    if (!shortcut || !shortcut.modifierOnly) {
+      return;
+    }
+    if (shortcut.value === input.dataset.pendingModifier) {
+      event.preventDefault();
+      event.stopPropagation();
+      commit(shortcut.value);
+      delete input.dataset.pendingModifier;
+      input.blur();
+    }
+  });
 }

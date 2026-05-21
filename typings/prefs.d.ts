@@ -19,6 +19,7 @@ declare namespace _ZoteroTypes {
       "annotationTranslationPositionInBody": string;
       "enableNote": boolean;
       "enableNoteReplaceMode": boolean;
+      "enablePopupDoubleClickCopy": boolean;
       "translateSource": string;
       "dictSource": string;
       "sourceLanguage": string;
@@ -35,6 +36,7 @@ declare namespace _ZoteroTypes {
       "showSidebarSettings": boolean;
       "showSidebarConcat": boolean;
       "enableConcatKey": boolean;
+      "concatShortcutKey": string;
       "showSidebarLanguage": boolean;
       "showSidebarRaw": boolean;
       "showSidebarCopy": boolean;
@@ -107,6 +109,9 @@ declare namespace _ZoteroTypes {
       "nllb.apiendpoint": string;
       "nllb.apistream": boolean;
       "nllb.serveendpoint": string;
+      "customGPT1.temperature": string;
+      "customGPT2.temperature": string;
+      "customGPT3.temperature": string;
     };
   }
 }

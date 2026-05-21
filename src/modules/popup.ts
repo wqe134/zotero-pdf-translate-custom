@@ -252,6 +252,9 @@ export function buildReaderPopup(
             {
               type: "dblclick",
               listener: (_ev) => {
+                if (!getPref("enablePopupDoubleClickCopy")) {
+                  return;
+                }
                 const textarea = popup.querySelector(
                   `#${makeId("text")}`,
                 ) as HTMLTextAreaElement;

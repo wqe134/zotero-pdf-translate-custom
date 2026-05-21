@@ -8,6 +8,8 @@ pref-basic-enablePopup =
     .label = Attiva popup di selezione nel lettore
 pref-basic-enableHidePopupTextarea =
     .label = Nascondi l'area del testo del popup
+pref-basic-enablePopupDoubleClickCopy =
+    .label = Fai doppio clic sul testo del popup per copiarlo
 pref-basic-annotationTranslationInComment =
     .label = Salva traduzione nel commento dell'annotazione
 pref-basic-annotationTranslationInBody =
@@ -88,6 +90,8 @@ pref-interface-enableConcatKey =
         [macos] ⌘
        *[other] Ctrl
     } per attivare la modalità di giunzione
+pref-interface-concatShortcutKey =
+    .value = Clicca il campo e premi la scorciatoia (vuoto = predefinito)
 pref-interface-showSidebarRaw =
     .label = Sezione del pannello dell'elemento: Mostra il testo originale
 pref-interface-enableMathRendering =

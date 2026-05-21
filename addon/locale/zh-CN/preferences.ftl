@@ -8,6 +8,8 @@ pref-basic-enablePopup =
     .label = 启用阅读器选择弹窗
 pref-basic-enableHidePopupTextarea =
     .label = 隐藏弹窗文本区域
+pref-basic-enablePopupDoubleClickCopy =
+    .label = 双击弹窗文本时复制内容
 pref-basic-annotationTranslationInComment =
     .label = 保存翻译至注释评论
 pref-basic-annotationTranslationInBody =
@@ -84,10 +86,12 @@ pref-interface-showSidebarSettings =
 pref-interface-showSidebarConcat =
     .label = 条目面板区块：显示拼接翻译菜单
 pref-interface-enableConcatKey =
-    .label = 条目面板区块：按住 { PLATFORM() ->
+    .label = 启用拼接模式快捷键（默认 { PLATFORM() ->
         [macos] ⌘
        *[other] Ctrl
-    } 键激活拼接模式
+    }）
+pref-interface-concatShortcutKey =
+    .value = 点击后按下快捷键（留空使用平台默认）
 pref-interface-showSidebarRaw =
     .label = 条目面板区块：显示原文
 pref-interface-enableMathRendering =
@@ -136,4 +140,3 @@ pref-about-version =
 
 pref-advanced-stripEmptyLines =
     .label = 从翻译结果中删除空行和思考内容
-
