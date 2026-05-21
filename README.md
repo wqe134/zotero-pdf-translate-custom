@@ -6,10 +6,18 @@
 _Translate for Zotero Custom_ is a community fork of _Translate for Zotero_ by windingwind.  
 It keeps the original translation workflow and adds a few local upgrades:
 
-- Reader concat mode can be triggered directly by selection with a custom shortcut
+_Translate for Zotero Custom_ 是 windingwind 的 _Translate for Zotero_ 的社区分支。  
+它保留了原有的翻译流程，并加入了几项本地改进：
+
+- Reader concat mode is enabled by default with `Ctrl` + mouse selection, and the shortcut can be customized in settings
 - Concat shortcut is recorded by key capture instead of typed manually
 - Pop-up double-click copy can be turned on or off
 - Plugin ID, namespace, and prefs are renamed to avoid conflicts with the upstream add-on
+
+- 阅读器拼接模式默认通过按住 `Ctrl` 并配合鼠标选择触发，也可以在设置中自定义快捷键
+- 拼接快捷键通过按键检测录入，而不是手动输入
+- 弹窗双击复制功能可开关控制
+- 插件 ID、命名空间和偏好设置前缀均已重命名，以避免与上游插件冲突
 
 Original project: [windingwind/zotero-pdf-translate](https://github.com/windingwind/zotero-pdf-translate)
 
