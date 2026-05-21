@@ -44,7 +44,7 @@ service-webliodict=Weblio Dict(en→ja)
 service-errorPrefix=[Request Error]
     Service not available, invalid secret, or request too fast.
     Use another translation service or post the issue here: 
-    https://github.com/windingwind/zotero-pdf-translate/issues
+    https://github.com/wqe134/zotero-pdf-translate-custom/issues
     
     The message below is not Zotero or the Translate plugin, but from
 

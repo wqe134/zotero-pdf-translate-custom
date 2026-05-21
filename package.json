@@ -1,6 +1,6 @@
 {
   "name": "zotero-pdf-translate-custom",
-  "version": "2.4.4",
+  "version": "2.4.5",
   "description": "Translate PDF, EPub, webpage, metadata, annotations, notes to the target language. Support 20+ translate services.",
   "config": {
     "addonName": "Translate for Zotero Custom",
@@ -22,7 +22,7 @@
     "type": "git",
     "url": "git+https://github.com/wqe134/zotero-pdf-translate-custom.git"
   },
-  "author": "windingwind",
+  "author": "wqe134",
   "license": "AGPL-3.0-or-later",
   "bugs": {
     "url": "https://github.com/wqe134/zotero-pdf-translate-custom/issues"

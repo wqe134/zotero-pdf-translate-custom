@@ -1,10 +1,17 @@
-# ![Translate for Zotero](addon/chrome/content/icons/favicon.png)Translate for Zotero
+# ![Translate for Zotero Custom](addon/chrome/content/icons/favicon.png)Translate for Zotero Custom
 
 [![zotero target version](https://img.shields.io/badge/Zotero-7/8-green?style=flat-square&logo=zotero&logoColor=CC2936)](https://www.zotero.org)
 [![Using Zotero Plugin Template](https://img.shields.io/badge/Using-Zotero%20Plugin%20Template-blue?style=flat-square&logo=github)](https://github.com/windingwind/zotero-plugin-template)
 
-_Translate for Zotero_, a.k.a. _Zotero PDF Translate_, is a [Zotero](https://www.zotero.org/) plugin.  
-Translate PDF, EPub, webpage, metadata, annotations, notes to the target language. Support 20+ translate services.
+_Translate for Zotero Custom_ is a community fork of _Translate for Zotero_ by windingwind.  
+It keeps the original translation workflow and adds a few local upgrades:
+
+- Reader concat mode can be triggered directly by selection with a custom shortcut
+- Concat shortcut is recorded by key capture instead of typed manually
+- Pop-up double-click copy can be turned on or off
+- Plugin ID, namespace, and prefs are renamed to avoid conflicts with the upstream add-on
+
+Original project: [windingwind/zotero-pdf-translate](https://github.com/windingwind/zotero-pdf-translate)
 
 [中文文档](https://zotero.yuque.com/books/share/4443494c-c698-4e08-9d1e-ed253390346d)
 
@@ -15,8 +22,8 @@ Translate PDF, EPub, webpage, metadata, annotations, notes to the target languag
 ## Install
 
 - Download the plugin (.xpi file) from below.
-  - [Latest Stable](https://github.com/windingwind/zotero-pdf-translate/releases/latest)
-  - [All Releases](https://github.com/windingwind/zotero-pdf-translate/releases)
+  - [Latest Stable](https://github.com/wqe134/zotero-pdf-translate-custom/releases/latest)
+  - [All Releases](https://github.com/wqe134/zotero-pdf-translate-custom/releases)
 
   _Note_ If you're using Firefox as your browser, right-click the `.xpi` and select "Save As.."
 
@@ -62,7 +69,7 @@ Press shortcut `Ctrl+T` after you selected some text. If you are in the collecti
 **A** The default target language is the same as your Zotero language. Go to `Edit->Settings->Translate->Service` and change the language settings.
 
 **Q** Translation not correct or report an error.  
-**A** See _Language Settings_ above and FAQ([#6](https://github.com/windingwind/zotero-pdf-translate/issues/6)). Make sure you use the right secret.
+**A** See _Language Settings_ above and FAQ([#6](https://github.com/wqe134/zotero-pdf-translate-custom/issues/6)). Make sure you use the right secret.
 
 **Q** I want to change the font size.  
 **A** Go to `Edit->Settings->Translate->User Interface` and set the font size.
@@ -163,7 +170,7 @@ The secret format is `MY_APIKEY#dictNo(optional)#memoryNo(optional)`.
 Apply [here](https://docs.microsoft.com/en-us/azure/cognitive-services/translator/quickstart-translator?tabs=csharp). Copy your secret and paste it into the settings.  
 The secret format is `serviceKEY#region(required if the region is not global)`.
 
-> See [this issue](https://github.com/windingwind/zotero-pdf-translate/issues/3#issuecomment-1064688597) for detailed steps to set up the Microsoft Translate.
+> See [this issue](https://github.com/wqe134/zotero-pdf-translate-custom/issues/3#issuecomment-1064688597) for detailed steps to set up the Microsoft Translate.
 
 **LingoCloud(Caiyun) Translate**  
 Apply [here](https://docs.caiyunapp.com/lingocloud-api/index.html#%E7%94%B3%E8%AF%B7%E8%AE%BF%E9%97%AE%E4%BB%A4%E7%89%8C).
@@ -282,8 +289,8 @@ This plugin is built based on the [Zotero Plugin Template](https://github.com/wi
 To startup, run
 
 ```bash
-git clone https://github.com/windingwind/zotero-pdf-translate.git
-cd zotero-pdf-translate
+git clone https://github.com/wqe134/zotero-pdf-translate-custom.git
+cd zotero-pdf-translate-custom
 npm install
 npm run build
 ```
@@ -321,6 +328,6 @@ If you want to leave your name here, please email me or leave a message with the
 
 ## Contributors
 
-<a href="https://github.com/windingwind/zotero-pdf-translate/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=windingwind/zotero-pdf-translate" />
+<a href="https://github.com/wqe134/zotero-pdf-translate-custom/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=wqe134/zotero-pdf-translate-custom" />
 </a>

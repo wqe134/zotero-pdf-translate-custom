@@ -44,7 +44,7 @@ service-webliodict=Weblio Dict(en→ja)
 service-errorPrefix=[Errore nella richiesta]
     Servizio di traduzione non disponibile, segreto non valido, o richiesta troppo rapida.
     Si prega di usare un altro servizio di traduzione o di segnalare il problema qui: 
-    https://github.com/windingwind/zotero-pdf-translate/issues
+    https://github.com/wqe134/zotero-pdf-translate-custom/issues
     
     Il messaggio seguente non è di Zotero o dell'estensione Translate ma proviene da
 
